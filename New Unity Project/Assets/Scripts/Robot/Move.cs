@@ -16,11 +16,10 @@ namespace Blitzcrank.Robot
         private void Moved()
         {
                 float rotation = Input.GetAxis("Horizontal") * _speed;
-                float translation = Input.GetAxis("Vertical") * _speed;
-
+                
                 rotation *= Time.deltaTime;
 
-                transform.Translate(rotation, translation,0);
+                transform.Translate(rotation, 0,0);
 
                 
         }

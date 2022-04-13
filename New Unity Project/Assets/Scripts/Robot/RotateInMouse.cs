@@ -24,12 +24,12 @@ public class RotateInMouse : MonoBehaviour
         //Vector3 difference=Camera.main.ScreenToWorldPoint(Input.mousePosition)-transform.position;
         float rotateZ=Mathf.Atan2(difference.y,difference.x)*Mathf.Rad2Deg;
         //Debug.Log(rotateZ);
-        if (rotateZ>60 && rotateZ<130)
+        if (rotateZ>70 && rotateZ<110)
         {
             Debug.Log("false");
             _isRender=false;
         }
-        if (rotateZ<-60 && rotateZ>-130)
+        if (rotateZ<-70 && rotateZ>-110)
         {
             Debug.Log("false");
             _isRender=false;
@@ -55,6 +55,11 @@ public class RotateInMouse : MonoBehaviour
         if(dist<=distanceRay && _isRender==true)
         {
             line.ShowTrajectory(obj.transform.position, speed);
+        }
+
+        if(Input.GetKeyDown(KeyCode.Z)&&_isRender==true)
+        {
+            GetComponent<HandLaunch>().CreateHand(obj.transform,speed);
         }
     }
 }
