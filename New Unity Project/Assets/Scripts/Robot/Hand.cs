@@ -78,7 +78,7 @@ public class Hand : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
    

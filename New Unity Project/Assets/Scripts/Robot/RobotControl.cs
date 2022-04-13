@@ -6,24 +6,30 @@ public class RobotControl : MonoBehaviour
 {
    private Fly _flyComponent;
    private Shield _shieldComponent;
-   private StateRobot _stateRobot;
 
-   private StateRobot _combatState; 
-   private StateRobot _lastState;
+   private  PressLever _pressLever;
+   [SerializeField] private StateRobot _stateRobot;
+   [SerializeField] private StateRobot _combatState; 
+   [SerializeField] private StateRobot _lastState;
 
-   private StateRobot _aimState; 
-   private StateRobot _lastCombatState; 
+   [SerializeField] private StateRobot _aimState; 
+   [SerializeField] private StateRobot _lastCombatState; 
 
-   
+
+
+    [SerializeField] private bool _isCanPress=false;
 
 
     private void Start()
     {
         _flyComponent=GetComponent<Fly>();
         _shieldComponent=GetComponent<Shield>();
+        _pressLever=GetComponent<PressLever>();
         _stateRobot=StateRobot.Neutral;
         _combatState=StateRobot.Neutral;
-        _aimState=StateRobot.Neutral;    
+        _aimState=StateRobot.Neutral;
+        _lastState=StateRobot.Neutral;
+        _lastCombatState=StateRobot.Neutral;    
     }
 
     private void Update() 
@@ -33,6 +39,13 @@ public class RobotControl : MonoBehaviour
        if(Input.GetKeyDown(KeyCode.Z))
        {
            _aimState=StateRobot.Aiming;
+       }
+       if(_isCanPress==true)
+       {
+           if(Input.GetKeyDown(KeyCode.E))
+           {
+               _pressLever.Press();
+           }
        }     
     }
 
@@ -51,7 +64,7 @@ public class RobotControl : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.X) && _stateRobot != StateRobot.Fly)
         {
             _flyComponent.BlastOff();
-            _stateRobot=StateRobot.Fly;
+            _stateRobot= StateRobot.Fly;
             Debug.Log("я лечу");
             return;
         }  
@@ -73,6 +86,12 @@ public class RobotControl : MonoBehaviour
             Debug.Log("щит Деактивирован");
             return;
         }     
+    }
+
+
+    public void UseLever(bool flag)
+    {
+        _isCanPress=flag;
     }
 
 }
