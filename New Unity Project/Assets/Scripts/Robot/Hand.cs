@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Blitzcrank.Robot;
 public class Hand : MonoBehaviour
 {
     
-    private Transform _robot;
+    private GameObject _robot;
     private Vector3 _target;
     private float _speed;
 
@@ -15,37 +15,46 @@ public class Hand : MonoBehaviour
     [SerializeField]private float _dist=4f;
 
     [SerializeField]private bool _isHandBack=false;
-    public void SetupHand(Vector3 target,float speed,Transform robot)
+    
+    [SerializeField]private bool _isHandtoHook=false;
+
+    private Rope _rope;
+    public void SetupHand(Vector3 target,float speed, GameObject robot,Rope rope)
     {
         _target=target;
         _speed=speed;
         _robot=robot;
-        _startPos=robot;
+        _startPos=robot.transform;
         _isHandBack=false;
+        _rope=rope;
+        _rope.Setup(gameObject);
         StartCoroutine(Fly());
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(_isHandBack==false)
+        if(_isHandtoHook==false)
         {
-            if(_target!=null&&Vector3.Distance(_robot.position,transform.position)<=_dist)
+            if(_isHandBack==false)
             {
-                transform.position=Vector3.MoveTowards(transform.position,_target,_speed);
+                if(_target!=null&&Vector3.Distance(_robot.transform.position,transform.position)<=_dist)
+                {
+                    transform.position=Vector3.MoveTowards(transform.position,_target,_speed);
+                }
             }
-        }
-        else
-        {
-            if(Vector3.Distance(_startPos.position,transform.position)>=0.5)
+            else
             {
-                transform.position=Vector3.MoveTowards(transform.position,_startPos.position,0.2f);
-                Debug.Log("Держу");
-            }
-            else 
-            {   
-                AddItemInventory();
-                DestroyHand();
+                if(Vector3.Distance(_startPos.position,transform.position)>=0.5)
+                {
+                    transform.position=Vector3.MoveTowards(transform.position,_startPos.position,0.2f);
+                    Debug.Log("Держу");
+                }
+                else 
+                {   
+                    AddItemInventory();
+                    DestroyHand();
+                }
             }
         }
         
@@ -54,8 +63,9 @@ public class Hand : MonoBehaviour
 
 
 
-    private void DestroyHand()
+    public void DestroyHand()
     {
+        _rope.DestroyHand();
         Destroy(gameObject);
     }
 
@@ -76,12 +86,23 @@ public class Hand : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        if(other.TryGetComponent(out Hook hook))
+        {
+            _isHandtoHook=true;
+            RobotMovetoHand();
+        }
         else
         {
             //Destroy(gameObject);
         }
     }
    
+
+   public void RobotMovetoHand()
+   {
+       _robot.GetComponent<Move>().SetupHand(gameObject);
+    
+   }
 
     IEnumerator Fly()
     {  
