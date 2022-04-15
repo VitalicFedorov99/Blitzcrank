@@ -74,7 +74,10 @@ public class HandForMoveObject : MonoBehaviour
                 {
                     transform.Translate(Vector2.down * Time.deltaTime*_speedHandWithObject);
                 }
-                //if(Input.GetKeyDown)
+                if(Input.GetKeyDown(KeyCode.X))
+                {
+                    DestroyGrabObj();
+                }
             }
             else
             {
@@ -110,6 +113,8 @@ public class HandForMoveObject : MonoBehaviour
 
      public void DestroyGrabObj()
      {
+         _grabObject.GetComponent<Rigidbody2D>().gravityScale=1;
+         _grabObject.transform.parent=null;
          _grabObject=null;
          _isHandGrabbed=false;
      }
@@ -118,6 +123,7 @@ public class HandForMoveObject : MonoBehaviour
     public void DestroyHand()
     {
         _rope.DestroyHand();
+        _robot.GetComponent<HandLaunch>().SetIsHandMoveObject(false);
         Destroy(gameObject);
     }
      

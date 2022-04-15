@@ -23,6 +23,7 @@ public class HandLaunch : MonoBehaviour
         {
             GameObject hand=Instantiate(_hand,place.position,Quaternion.identity);
             hand.GetComponent<Hand>().SetupHand(target,_speed,gameObject,_rope);
+            _isHand=true;
         }
         //StartCoroutine(FlyHand(target,hand));
         //_hand.transform.position=Vector3.MoveTowards(transform.position,target,_speed);
@@ -34,9 +35,20 @@ public class HandLaunch : MonoBehaviour
         {
             GameObject hand=Instantiate(_handMoveObject,place.position,Quaternion.identity);
             hand.GetComponent<HandForMoveObject>().SetupHand(target,_speed,gameObject,_ropeHandMoveObject);
+            _isHandMoveObject=true;
         //StartCoroutine(FlyHand(target,hand));
         //_hand.transform.position=Vector3.MoveTowards(transform.position,target,_speed);
         }
+    }
+
+    public void SetIsHandMoveObject(bool flag)
+    {
+        _isHandMoveObject=flag;
+    }
+
+    public void SetIsHand(bool flag)
+    {
+        _isHand=flag;
     }
     
 
@@ -46,4 +58,6 @@ public class HandLaunch : MonoBehaviour
         hand.transform.position=Vector3.MoveTowards(hand.transform.position,target,_speed);
         yield return new WaitForSeconds(4f);
     }
+
+
 }
