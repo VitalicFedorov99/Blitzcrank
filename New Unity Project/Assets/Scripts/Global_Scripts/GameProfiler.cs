@@ -18,6 +18,7 @@ public class GameProfiler : ScriptableObject
             MissonInfo mission = missionsResult[i];
             if (mission.MissionName == _missionName) {
                 mission.StarsCount = starCount;
+                return;
             }
         }
     }
