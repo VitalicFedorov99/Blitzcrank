@@ -12,6 +12,4 @@ public class Lever : MonoBehaviour
         _objectInfluence.GetComponent<ILever>().Doing();
     }
 
-    
-
 }
