@@ -23,7 +23,7 @@ public class SceneTransitionManager : MonoBehaviour
         if(loadingSceneOperation != null) 
         {
             progressBar.size = loadingSceneOperation.progress;
-            if (isAnimEnd && Input.GetKeyDown(KeyCode.KeypadEnter)) {
+            if (isAnimEnd && Input.GetKeyDown(KeyCode.Return)) {
                 instance.loadingSceneOperation.allowSceneActivation = true;
                 HideLoadingScreen();
                 isAnimEnd = false;
