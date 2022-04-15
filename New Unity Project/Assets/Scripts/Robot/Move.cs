@@ -70,10 +70,12 @@ namespace Blitzcrank.Robot
             }
         }
 
-        public void NotMove()
+        public void GetIsNotMove(bool flag)
         {
-            _isNotMove=true;
+            _isNotMove=flag;
         }
+        
+
         
 
         

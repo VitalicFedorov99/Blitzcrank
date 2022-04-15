@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BigBox : MonoBehaviour, IObjectGrab
 {
+
+    private bool _isCollision=false;
     public void Grab(){}
 
     public void Grab(GameObject parent)
@@ -14,4 +16,19 @@ public class BigBox : MonoBehaviour, IObjectGrab
             _hand.ObjectCaptured(gameObject);
         }
     }
+    
+    private void OnCollisionEnter2D(Collision2D other) {
+            _isCollision=true;
+    }
+
+     private void OnCollisionExit2D(Collision2D other) 
+     {
+         _isCollision=false;
+     }
+
+     private bool GetIsCollision()
+     {
+         return _isCollision;
+     }
+    
 }
