@@ -35,11 +35,6 @@ public class HandForMoveObject : MonoBehaviour
      private bool _blockLeft=false;
      private bool _blockDown=false; 
      private bool _blockUp=false;
-
-     [SerializeField] private bool _collisionRight=false;
-     [SerializeField] private bool _collisionLeft=false;
-     [SerializeField] private bool _collisionDown=false; 
-     [SerializeField] private bool _collisionkUp=false;
      public void SetupHand(Vector3 target,float speed, GameObject robot,Rope rope)
      {
         _target=target;
@@ -63,11 +58,21 @@ public class HandForMoveObject : MonoBehaviour
             }
             if(other.TryGetComponent(out IEnemy enemy))
             {
-                Destroy(gameObject);
-            }
-            else
-            {
+                 _isHandBack=true;
                 //Destroy(gameObject);
+            }
+            if(other.CompareTag("Ground"))
+            {
+                _isHandBack=true;
+            
+            }
+            if(other.TryGetComponent(out Hook hook))
+            {
+                 _isHandBack=true;
+            }
+            if(other.TryGetComponent(out Box box))
+            {
+                 _isHandBack=true;
             }
         }
      }
@@ -216,14 +221,6 @@ public class HandForMoveObject : MonoBehaviour
         Destroy(gameObject);
     }
 
-
-    public void SetCollisionObject(bool isRight,bool isLeft, bool isDown, bool isUp)
-    {
-       _collisionRight=isRight;
-       _collisionLeft=isLeft;
-       _collisionDown=isDown;
-       _collisionkUp=isUp;
-    }
      
     
 

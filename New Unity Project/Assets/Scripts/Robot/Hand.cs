@@ -38,6 +38,10 @@ public class Hand : MonoBehaviour
         {
             if(_isHandBack==false)
             {
+                if(Input.GetKeyDown(KeyCode.Z))
+                {
+                     _isHandBack=true;
+                }
                 if(_target!=null&&Vector3.Distance(_robot.transform.position,transform.position)<=_dist)
                 {
                     transform.position=Vector3.MoveTowards(transform.position,_target,_speed);
@@ -57,6 +61,7 @@ public class Hand : MonoBehaviour
                 }
             }
         }
+        
         
     }
 
@@ -82,18 +87,21 @@ public class Hand : MonoBehaviour
         {
             obj.Grab(gameObject);
             obj.Grab();
+            _isHandBack=true;
         }
         if(other.TryGetComponent(out IEnemy enemy))
         {
-            Destroy(gameObject);
+             _isHandBack=true;
+            //Destroy(gameObject);
         }
         if(other.TryGetComponent(out Hook hook))
         {
             _isHandtoHook=true;
             RobotMovetoHand();
         }
-        else
+        if(other.CompareTag("Ground"))
         {
+           _isHandBack=true;
             //Destroy(gameObject);
         }
     }
@@ -115,4 +123,6 @@ public class Hand : MonoBehaviour
         _isHandBack=true;
     }
 
+
+    
 }

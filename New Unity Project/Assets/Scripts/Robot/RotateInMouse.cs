@@ -15,7 +15,10 @@ public class RotateInMouse : MonoBehaviour
 
     public GameObject obj1;
 
-    public GameObject handPobot;
+    public bool skillX=false;
+    public bool skillZ=false;
+    
+    
 
     public bool _isRender;
     private void Update() 

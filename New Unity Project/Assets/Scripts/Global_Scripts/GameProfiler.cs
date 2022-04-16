@@ -5,8 +5,12 @@ using UnityEngine;
 public class GameProfiler : ScriptableObject
 {
     private MissonInfo[] missionsResult;
-    private Dictionary<string, bool> skills = new Dictionary<string, bool> 
-    {{"first", true}, {"second", false}, {"third", false}};
+   // private Dictionary<string, bool> skills = new Dictionary<string, bool> 
+    //{{"first", true}, {"second", false}, {"third", false}};
+
+    [SerializeField] private bool skillHandZ=true;
+
+    [SerializeField] private bool skillHandX=false;
 
     public MissonInfo MissionResultCheck(int id){
         return missionsResult[id];
@@ -21,5 +25,11 @@ public class GameProfiler : ScriptableObject
                 return;
             }
         }
+    }
+
+    public void GetSkillHand(out bool skillZ,out bool skillX)
+    {
+        skillZ=skillHandZ;
+        skillX=skillHandX;
     }
 }

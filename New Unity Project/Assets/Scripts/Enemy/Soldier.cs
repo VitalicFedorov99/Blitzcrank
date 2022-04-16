@@ -43,7 +43,7 @@ public class Soldier : ObservedObject,IEnemy,IObjectGrab
         Debug.Log("Stun");
         if(_lastState==StateSoldier.Shoot) StopCoroutine(_soldierShoot);
         if(_lastState==StateSoldier.Walk) StopCoroutine(_soldierMove);
-        StopCoroutine(_soldierMean);
+        //StopCoroutine(_soldierMean);
         observedEvent?.Invoke(EnumObservedType.EnemyStun);
         StartCoroutine(Stuning());
     }
@@ -75,13 +75,16 @@ public class Soldier : ObservedObject,IEnemy,IObjectGrab
 
    public void Grab()
    {
+       if(_state!=StateSoldier.Stun)
+       {
        _lastState=_state;
        _state=StateSoldier.Stun;
-       _health--;
+       //_health--;
        Stun();
-       if(_health<=0)
-       {
-           Death();
+    //    if(_health<=0)
+    //    {
+    //        Death();
+    //    }
        }
    }
 
@@ -93,8 +96,8 @@ public class Soldier : ObservedObject,IEnemy,IObjectGrab
 
   private void Start() 
   {
-      _soldierMean=MakeAdecision();
-      StartCoroutine(_soldierMean);
+    //   _soldierMean=MakeAdecision();
+    //   StartCoroutine(_soldierMean);
       _soldierShoot=Shoot();
       StartCoroutine(_soldierShoot);
       _state=StateSoldier.Shoot;
@@ -125,8 +128,8 @@ public class Soldier : ObservedObject,IEnemy,IObjectGrab
              _soldierShoot=Shoot();
              StartCoroutine(_soldierShoot);
          }
-        _soldierMean=MakeAdecision();
-        StartCoroutine(_soldierMean);
+        //_soldierMean=MakeAdecision();
+        //StartCoroutine(_soldierMean);
         Debug.Log("StunEnd");
     }
     IEnumerator MakeAdecision()
