@@ -2,43 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Soldier : MonoBehaviour,IEnemy,IObjectGrab
+public class Soldier : ObservedObject,IEnemy,IObjectGrab
 {
 
     [SerializeField] private int _health=3;
-
     [SerializeField] private float _timeReload;
-
     [SerializeField] private float _timeStun;
-
     [SerializeField] private float _speedSoldier;
-
     [SerializeField] private float _timeMean;
     [SerializeField] private GameObject _bullet;
-
     [SerializeField] private Transform _pointTrap;
-
-    [SerializeField] private Transform[] _pointWalk;
-    
-
-    [SerializeField] private Transform _aim;
-
-    
-    [SerializeField] private int _vectorDirection;
-    
-
+    [SerializeField] private Transform[] _pointWalk;  
+    [SerializeField] private Transform _aim;    
+    [SerializeField] private int _vectorDirection;    
     [SerializeField] private int idPointWalk=0;
-
     [SerializeField] private StateSoldier _state;
-
     [SerializeField] private StateSoldier _lastState;
-
     //[SerializeField] private string _textDialog;
 
     private Transform _pointMove;
     IEnumerator _soldierShoot;
     IEnumerator _soldierMove; 
-
     IEnumerator _soldierMean; 
  
   public void Walk()
@@ -49,42 +33,44 @@ public class Soldier : MonoBehaviour,IEnemy,IObjectGrab
     StartCoroutine(_soldierMove);
   }
 
-  public void Say()
-  {
+    public void Say()
+    {
 
-  }
+    }
 
-  public void Stun()
-  {
-     Debug.Log("Stun");
-     if(_lastState==StateSoldier.Shoot) StopCoroutine(_soldierShoot);
-     if(_lastState==StateSoldier.Walk) StopCoroutine(_soldierMove);
-     StopCoroutine(_soldierMean);
-     StartCoroutine(Stuning());
-  }
+    public void Stun()
+    {
+        Debug.Log("Stun");
+        if(_lastState==StateSoldier.Shoot) StopCoroutine(_soldierShoot);
+        if(_lastState==StateSoldier.Walk) StopCoroutine(_soldierMove);
+        StopCoroutine(_soldierMean);
+        observedEvent?.Invoke(EnumObservedType.EnemyStun);
+        StartCoroutine(Stuning());
+    }
 
 
     
     
-  public void Attack()
-  {
+    public void Attack()
+    {
       Debug.Log("Shoot");
       GameObject bull=Instantiate(_bullet,_aim.position,Quaternion.identity);
       bull.GetComponent<BulletEnemy>().Setup(_vectorDirection);
-  }
+    }
 
 
 
-  public void Death()
-  {
-      Destroy(gameObject);
-  }
+    public void Death()
+    {
+        MissionObserver.GetObservedTypeAction(EnumObservedType.EnemyKill);
+        Destroy(gameObject);
+    }
 
-  public void GoTrap()
-  {
+    public void GoTrap()
+    {
       _state=StateSoldier.Walk;
       
-  }
+    }
 
 
    public void Grab()
@@ -143,8 +129,6 @@ public class Soldier : MonoBehaviour,IEnemy,IObjectGrab
         StartCoroutine(_soldierMean);
         Debug.Log("StunEnd");
     }
-  
-
     IEnumerator MakeAdecision()
     {
         yield return new WaitForSeconds(_timeMean);
@@ -165,7 +149,6 @@ public class Soldier : MonoBehaviour,IEnemy,IObjectGrab
         _soldierMean=MakeAdecision();
         StartCoroutine(_soldierMean);
     }
-
     IEnumerator Moving()
     {   
         Debug.Log("Walk");
@@ -210,6 +193,4 @@ public class Soldier : MonoBehaviour,IEnemy,IObjectGrab
         }
         
     }
-
-
 }
