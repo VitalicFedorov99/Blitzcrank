@@ -16,9 +16,9 @@ public class BigBox : MonoBehaviour, IObjectGrab
         }
     }
     
-    private void OnCollisionEnter2D(Collision2D other) {
-          
-            if(_hand!=null && other.gameObject.TryGetComponent(out Soldier soldier))
+    private void OnCollisionEnter2D(Collision2D other)
+     {
+            if(_hand==null && other.gameObject.TryGetComponent(out Soldier soldier))
             {
                 soldier.Death();
             }
@@ -28,6 +28,11 @@ public class BigBox : MonoBehaviour, IObjectGrab
     public void SetHand(HandForMoveObject hand)
     {
         _hand=hand;
+    }
+
+    public void DeleteHand()
+    {
+        _hand=null;
     }
 
 

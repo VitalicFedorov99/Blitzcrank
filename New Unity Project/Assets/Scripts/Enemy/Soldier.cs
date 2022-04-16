@@ -132,7 +132,7 @@ public class Soldier : ObservedObject,IEnemy,IObjectGrab
         //StartCoroutine(_soldierMean);
         Debug.Log("StunEnd");
     }
-    IEnumerator MakeAdecision()
+  /*  IEnumerator MakeAdecision()
     {
         yield return new WaitForSeconds(_timeMean);
         if (_state==StateSoldier.Shoot)
@@ -152,6 +152,7 @@ public class Soldier : ObservedObject,IEnemy,IObjectGrab
         _soldierMean=MakeAdecision();
         StartCoroutine(_soldierMean);
     }
+    */
     IEnumerator Moving()
     {   
         Debug.Log("Walk");

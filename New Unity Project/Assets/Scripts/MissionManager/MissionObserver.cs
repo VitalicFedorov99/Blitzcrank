@@ -3,10 +3,24 @@ using UnityEngine.Events;
 
 public class MissionObserver : MonoBehaviour
 {
+    // public static  MissionObserver instance {get; private set;}
+
     public static UnityAction<EnumObservedType> GetObservedTypeAction;
     private int CountEnemyKills;
     private int CountEnemyStuns;
     private int CountStarFind;
+
+
+
+    // private void Awake() 
+    // {
+    //     if(instance==null)
+    //     {
+    //         instance=this;
+    //         DontDestroyOnLoad(this.gameObject);
+    //         return;
+    //     }
+    // }
 
     private void Start(){
         GetObservedTypeAction += GetObservedType;

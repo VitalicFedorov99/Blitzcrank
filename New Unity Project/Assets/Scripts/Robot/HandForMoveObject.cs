@@ -74,6 +74,10 @@ public class HandForMoveObject : MonoBehaviour
             {
                  _isHandBack=true;
             }
+            if(other.TryGetComponent(out Lava lava))
+            {
+                 _isHandBack=true;
+            }
         }
      }
 
@@ -204,6 +208,10 @@ public class HandForMoveObject : MonoBehaviour
      {
          Debug.Log("Отпускаю");
          _isUse=true;
+         if(_grabObject.TryGetComponent(out BigBox box))
+          {
+              box.DeleteHand();
+          }
          _grabObject.GetComponent<Rigidbody2D>().gravityScale=1;
          gameObject.transform.parent=null;
          _grabObject=null;

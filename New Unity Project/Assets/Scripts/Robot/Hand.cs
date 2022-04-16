@@ -104,6 +104,10 @@ public class Hand : MonoBehaviour
            _isHandBack=true;
             //Destroy(gameObject);
         }
+        if(other.TryGetComponent(out Lava lava))
+        {
+            _isHandBack=true;
+        }
     }
    
 

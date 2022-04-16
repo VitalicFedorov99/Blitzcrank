@@ -54,31 +54,15 @@ public class Lava : MonoBehaviour
         yield return new WaitForSeconds(_time);
         Debug.Log("Лава");
         _isUpLava=!_isUpLava;
-        _isStopUpdateLava=false;
-        /*yield return new WaitForSeconds(_time);
-        if(_isUpLava==true){
-            gameObject.transform.position=Vector3.Lerp(transform.position,_positionUp.position,_speed);
-            //yield return new WaitForSeconds(_time);
-            if(Vector3.Distance(transform.position,_positionUp.position)<0.3f)
-            {
-                _isUpLava=false;
-                StartCoroutine(MoveLava());
-            }
-            else StartCoroutine(MoveLava());
-        }
-        else
+        _isStopUpdateLava=false;        
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) 
+    {
+        if(other.TryGetComponent(out CharacterRobot robotCharacter))
         {
-            gameObject.transform.position=Vector3.Lerp(transform.position,_positionDown.position,_speed);
-            //yield return new WaitForSeconds(_time);
-            if(Vector3.Distance(transform.position,_positionDown.position)<0.3f)
-            {
-                _isUpLava=true;
-                StartCoroutine(MoveLava());
-            }
-            else StartCoroutine(MoveLava());
-        }
-        */
-        
+            robotCharacter.Death();
+        }    
     }
 
 }

@@ -60,11 +60,11 @@ public class RotateInMouse : MonoBehaviour
             line.ShowTrajectory(obj.transform.position, speed);
         }
 
-        if(Input.GetKeyDown(KeyCode.Z)&&_isRender==true)
+        if(Input.GetKeyDown(KeyCode.Z)&&_isRender==true && skillZ==true)
         {
             GetComponent<HandLaunch>().CreateHand(obj.transform,speed);
         }
-        if(Input.GetKeyDown(KeyCode.X)&&_isRender==true)
+        if(Input.GetKeyDown(KeyCode.X)&&_isRender==true && skillX==true)
         {
             GetComponent<HandLaunch>().CreateHandMoveObject(obj.transform,speed);
         }
