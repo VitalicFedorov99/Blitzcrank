@@ -66,6 +66,7 @@ public class Hand : MonoBehaviour
     public void DestroyHand()
     {
         _rope.DestroyHand();
+        _robot.GetComponent<HandLaunch>().SetIsHand(false);
         Destroy(gameObject);
     }
 

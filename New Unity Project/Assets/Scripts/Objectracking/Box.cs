@@ -11,7 +11,10 @@ public class Box : MonoBehaviour,IObjectGrab
 
     public void Grab(GameObject parent)
     {
-        transform.SetParent(parent.transform);
+        if(parent.TryGetComponent(out Hand _hand))
+        {
+             transform.SetParent(parent.transform);
+        }
     }
     
     

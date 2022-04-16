@@ -35,6 +35,11 @@ public class HandForMoveObject : MonoBehaviour
      private bool _blockLeft=false;
      private bool _blockDown=false; 
      private bool _blockUp=false;
+
+     [SerializeField] private bool _collisionRight=false;
+     [SerializeField] private bool _collisionLeft=false;
+     [SerializeField] private bool _collisionDown=false; 
+     [SerializeField] private bool _collisionkUp=false;
      public void SetupHand(Vector3 target,float speed, GameObject robot,Rope rope)
      {
         _target=target;
@@ -73,8 +78,8 @@ public class HandForMoveObject : MonoBehaviour
             {   
                 if (Input.GetKey(KeyCode.A))
                 {   
-                    if (Vector3.Distance(new Vector3(transform.position.x-1,transform.position.y,transform.position.z),_robot.transform.position)<=_distRobotBetweenHand ) 
-                    // && Vector3.Distance(new Vector3(transform.position.x,transform.position.y,transform.position.z),_robot.transform.position)>= 1)
+                    if (Vector3.Distance(new Vector3(transform.position.x-1,transform.position.y,transform.position.z),_robot.transform.position)<=_distRobotBetweenHand) 
+                    // && _collisionLeft==false)
                     {
                         _blockLeft=false;
                     }
@@ -84,14 +89,15 @@ public class HandForMoveObject : MonoBehaviour
                     }
                     if(_blockLeft==false)
                     { 
-                        transform.Translate(Vector2.left * Time.deltaTime*_speedHandWithObject);
+                        _grabObject.transform.Translate(Vector2.left * Time.deltaTime*_speedHandWithObject);
+                        gameObject.transform.position=_grabObject.transform.position;
                     }
                    
                 }
                 if (Input.GetKey(KeyCode.D))
                 {
                     if (Vector3.Distance(new Vector3(transform.position.x+1,transform.position.y,transform.position.z),_robot.transform.position)<=_distRobotBetweenHand)
-                    //&& Vector3.Distance(new Vector3(transform.position.x+1,transform.position.y,transform.position.z),_robot.transform.position)>= 1)
+                    //&&_collisionRight==false)
                     {
                         _blockRight=false;
                     }
@@ -101,13 +107,14 @@ public class HandForMoveObject : MonoBehaviour
                     }
                     if(_blockRight==false)
                     {
-                        transform.Translate(Vector2.right * Time.deltaTime*_speedHandWithObject);
+                         _grabObject.transform.Translate(Vector2.right * Time.deltaTime*_speedHandWithObject);
+                         gameObject.transform.position=_grabObject.transform.position;
                     }
                 }
                 if (Input.GetKey(KeyCode.W))
                 {
                     if (Vector3.Distance(new Vector3(transform.position.x,transform.position.y+1,transform.position.z),_robot.transform.position)<=_distRobotBetweenHand)
-                    // && Vector3.Distance(new Vector3(transform.position.x,transform.position.y,transform.position.z),_robot.transform.position)>= 1)
+                     //&& _collisionkUp==false)
                     {
                         _blockUp=false;
                     }
@@ -117,13 +124,14 @@ public class HandForMoveObject : MonoBehaviour
                     }
                     if(_blockUp==false)
                     {
-                       transform.Translate(Vector2.up * Time.deltaTime*_speedHandWithObject);
+                        _grabObject.transform.Translate(Vector2.up * Time.deltaTime*_speedHandWithObject);
+                        gameObject.transform.position=_grabObject.transform.position;
                     }
                 }
                 if (Input.GetKey(KeyCode.S))
                 {
                     if (Vector3.Distance(new Vector3(transform.position.x,transform.position.y-1,transform.position.z),_robot.transform.position)<=_distRobotBetweenHand)
-                    // &&  Vector3.Distance(new Vector3(transform.position.x,transform.position.y,transform.position.z),_robot.transform.position)>= 1)
+                    //&&  _collisionDown==false)
                     {
                         _blockDown=false;
                     }
@@ -133,7 +141,9 @@ public class HandForMoveObject : MonoBehaviour
                     }
                     if(_blockDown==false)
                     {
-                        transform.Translate(Vector2.down * Time.deltaTime*_speedHandWithObject);
+                        _grabObject.transform.Translate(Vector2.down * Time.deltaTime*_speedHandWithObject);
+                        gameObject.transform.position=_grabObject.transform.position;
+                        
                     }
                 }
                 if(Input.GetKeyDown(KeyCode.X))
@@ -172,11 +182,16 @@ public class HandForMoveObject : MonoBehaviour
 
      public void ObjectCaptured(GameObject obj)
      {
+         gameObject.transform.SetParent(obj.transform);
          _robot.GetComponent<Move>().GetIsNotMove(true);
          _grabObject=obj;
+          if(_grabObject.TryGetComponent(out BigBox box))
+          {
+              box.SetHand(GetComponent<HandForMoveObject>());
+          }
         //  _box=_grabObject.GetComponent<BigBox>();
          _grabObject.GetComponent<Rigidbody2D>().gravityScale=0;
-         _grabObject.GetComponent<BoxCollider2D>().enabled=false;
+         //_grabObject.GetComponent<BoxCollider2D>().enabled=false;
          _isHandGrabbed=true;
      }
 
@@ -185,8 +200,7 @@ public class HandForMoveObject : MonoBehaviour
          Debug.Log("Отпускаю");
          _isUse=true;
          _grabObject.GetComponent<Rigidbody2D>().gravityScale=1;
-         _grabObject.GetComponent<BoxCollider2D>().enabled=true;
-         _grabObject.transform.parent=null;
+         gameObject.transform.parent=null;
          _grabObject=null;
          _isHandGrabbed=false;
          _isHandBack=true;
@@ -200,6 +214,15 @@ public class HandForMoveObject : MonoBehaviour
         _robot.GetComponent<HandLaunch>().SetIsHandMoveObject(false);
         _robot.GetComponent<Move>().GetIsNotMove(false);
         Destroy(gameObject);
+    }
+
+
+    public void SetCollisionObject(bool isRight,bool isLeft, bool isDown, bool isUp)
+    {
+       _collisionRight=isRight;
+       _collisionLeft=isLeft;
+       _collisionDown=isDown;
+       _collisionkUp=isUp;
     }
      
     

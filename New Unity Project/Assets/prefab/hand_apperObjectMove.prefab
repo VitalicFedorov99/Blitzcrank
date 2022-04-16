@@ -145,5 +145,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dist: 5
-  _distRobotBetweenHand: 7
+  _distRobotBetweenHand: 10
   _speedHandWithObject: 6
+  _collisionRight: 0
+  _collisionLeft: 0
+  _collisionDown: 0
+  _collisionkUp: 0
