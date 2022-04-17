@@ -314,6 +314,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2034797098}
     m_Modifications:
+    - target: {fileID: 8715903816625351992, guid: 7eefe9b8138bc134291b2dcc6fe1db68, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 80587fc8fd153154e9df776f85ada258, type: 3}
     - target: {fileID: 8715903816636510894, guid: 7eefe9b8138bc134291b2dcc6fe1db68, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -402,18 +406,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: MissionPanel
       objectReference: {fileID: 0}
-    - target: {fileID: 8715903816694346157, guid: 7eefe9b8138bc134291b2dcc6fe1db68, type: 3}
-      propertyPath: m_Color.b
-      value: 0.19607843
-      objectReference: {fileID: 0}
-    - target: {fileID: 8715903816694346157, guid: 7eefe9b8138bc134291b2dcc6fe1db68, type: 3}
-      propertyPath: m_Color.g
-      value: 0.19607843
-      objectReference: {fileID: 0}
-    - target: {fileID: 8715903816694346157, guid: 7eefe9b8138bc134291b2dcc6fe1db68, type: 3}
-      propertyPath: m_Color.r
-      value: 0.19607843
-      objectReference: {fileID: 0}
+    - target: {fileID: 8715903816888707561, guid: 7eefe9b8138bc134291b2dcc6fe1db68, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 80587fc8fd153154e9df776f85ada258, type: 3}
+    - target: {fileID: 8715903817437203766, guid: 7eefe9b8138bc134291b2dcc6fe1db68, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 80587fc8fd153154e9df776f85ada258, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7eefe9b8138bc134291b2dcc6fe1db68, type: 3}
 --- !u!224 &322304240 stripped
