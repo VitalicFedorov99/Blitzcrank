@@ -4,7 +4,7 @@ using UnityEngine.Events;
 public class MissionObserver : MonoBehaviour
 {
     // public static  MissionObserver instance {get; private set;}
-
+    [SerializeField] private WinOrLose winOrLose;
     public static UnityAction<EnumObservedType> GetObservedTypeAction;
     private int CountEnemyKills;
     private int CountEnemyStuns;
@@ -44,6 +44,9 @@ public class MissionObserver : MonoBehaviour
             case(EnumObservedType.Finished):
                     Finished();
                 break;
+            case(EnumObservedType.RobotDead):
+                    RobotDead();
+                break;
         }
     }
 
@@ -56,6 +59,12 @@ public class MissionObserver : MonoBehaviour
     }
 
     private void Finished() {
+        Debug.Log("Победа");
+    }
 
+    private void RobotDead()
+    {
+        Debug.Log("Поражение");
+        //winOrLose.Lose();
     }
 }
