@@ -143,6 +143,7 @@ GameObject:
   - component: {fileID: 40527848}
   - component: {fileID: 40527847}
   - component: {fileID: 40527846}
+  - component: {fileID: 40527842}
   m_Layer: 0
   m_Name: walk_animation_robot_000
   m_TagString: Robot
@@ -265,7 +266,8 @@ MonoBehaviour:
   obj: {fileID: 778403255}
   obj2: {fileID: 1734702642}
   obj1: {fileID: 778403255}
-  handPobot: {fileID: 0}
+  skillX: 0
+  skillZ: 0
   _isRender: 0
 --- !u!114 &40527840
 MonoBehaviour:
@@ -297,6 +299,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _invetory: []
+--- !u!95 &40527842
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 40527834}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cea75beaf9e1a5d459cb9f8e7ddab033, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &40527843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -323,7 +344,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 0
-  _armor: 0
   _batary: 0
 --- !u!50 &40527846
 Rigidbody2D:
@@ -414,11 +434,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 34
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &80588910 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7353133757374502050, guid: 97d1f418bfbe66043a04dc55c92ff87a, type: 3}
-  m_PrefabInstance: {fileID: 4095041385403387330}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &128977993
 GameObject:
   m_ObjectHideFlags: 0
@@ -4742,7 +4757,8 @@ MonoBehaviour:
   obj: {fileID: 778403255}
   obj2: {fileID: 0}
   obj1: {fileID: 0}
-  handPobot: {fileID: 80588910}
+  skillX: 0
+  skillZ: 0
   _isRender: 0
 --- !u!1 &1829571841
 GameObject:
