@@ -175,6 +175,11 @@ MonoBehaviour:
   - {fileID: 8715903816625351992}
   - {fileID: 8715903817437203766}
   missionNumber: {fileID: 8715903816694346157}
+  missionInfo:
+    starCount: 1
+    isMissionAvailable: 1
+    missionNumber: 1
+    missionTechName: SampleScene
 --- !u!114 &6176577433206696206
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -24,7 +24,7 @@ public class SceneTransitionManager : MonoBehaviour
         {    
             progressBar.size = loadingSceneOperation.progress;
             if (loadingSceneOperation.progress>=0.9f) LoadingOver();
-
+            Debug.LogError(loadingSceneOperation.progress);
             if (Input.GetKeyDown(KeyCode.Return)) {
                 instance.loadingSceneOperation.allowSceneActivation = true;
                 HideLoadingScreen();
