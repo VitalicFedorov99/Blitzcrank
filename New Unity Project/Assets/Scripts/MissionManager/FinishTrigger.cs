@@ -7,7 +7,12 @@ public class FinishTrigger : ObservedObject
     {
         if(other.TryGetComponent(out CharacterRobot robot)) 
         {
-            MissionObserver.GetObservedTypeAction(EnumObservedType.Finished);
+            if(robot.GetEndGame()==false)
+            {
+                MissionObserver.GetObservedTypeAction(EnumObservedType.Finished);
+                Debug.Log("ИвентЗасчитан");
+                robot.SetEndGame(true);
+            }
             //observedEvent?.Invoke(EnumObservedType.Finished);
         }
     }

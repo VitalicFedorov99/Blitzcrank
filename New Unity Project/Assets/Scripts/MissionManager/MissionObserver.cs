@@ -6,9 +6,9 @@ public class MissionObserver : MonoBehaviour
     // public static  MissionObserver instance {get; private set;}
     [SerializeField] private WinOrLose winOrLose;
     public static UnityAction<EnumObservedType> GetObservedTypeAction;
-    private int CountEnemyKills;
-    private int CountEnemyStuns;
-    private int CountStarFind;
+    private int CountEnemyKills=0;
+    private int CountEnemyStuns=0;
+    private int CountStarFind=0;
 
 
 
@@ -22,8 +22,13 @@ public class MissionObserver : MonoBehaviour
     //     }
     // }
 
-    private void Start(){
+    private void Awake(){
         GetObservedTypeAction += GetObservedType;
+    
+        CountEnemyKills=0;
+        CountEnemyStuns=0;
+        CountStarFind=0;
+        Debug.Log("Сетап");
     }
 
     public  void GetObservedType(EnumObservedType observedType){
@@ -60,11 +65,17 @@ public class MissionObserver : MonoBehaviour
 
     private void Finished() {
         Debug.Log("Победа");
+        winOrLose.Win(CountStarFind);
     }
 
     private void RobotDead()
     {
         Debug.Log("Поражение");
-        //winOrLose.Lose();
+        winOrLose.Lose();
+    }
+    
+    private void OnDisable() 
+    {
+         GetObservedTypeAction-=GetObservedType;
     }
 }

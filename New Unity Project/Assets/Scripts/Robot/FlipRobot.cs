@@ -11,17 +11,21 @@ public class FlipRobot : MonoBehaviour
 
    private RotateInMouse _robot; 
    
+   private CharacterRobot _robotCharacter;
    private void Start() 
    {
     main=Camera.main;  
     _sprite=GetComponent<SpriteRenderer>();  
     _robot=GetComponent<RotateInMouse>();
+    _robotCharacter=GetComponent<CharacterRobot>();
    }
    private void Update()
    {
-    
-       pos=main.WorldToScreenPoint(transform.position);
-       Flip();
+       if(_robotCharacter.GetEndGame()==false)
+       {
+            pos=main.WorldToScreenPoint(transform.position);
+            Flip();
+       }
    }
 
    private void Flip()

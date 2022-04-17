@@ -19,6 +19,7 @@ public class Rope : MonoBehaviour
   public void Setup(GameObject hand)
   {
       _hand=hand;
+      
   }
 
   public void DestroyHand()
@@ -30,7 +31,8 @@ public class Rope : MonoBehaviour
   {
     _lineRender.positionCount=0;
     if(_hand!=null)
-    {
+    { 
+      Debug.Log("Рисую");
         //Vector3[] points = new Vector3[3];
         _lineRender.positionCount = 2;
         _lineRender.SetPosition(0,_robot.transform.position);

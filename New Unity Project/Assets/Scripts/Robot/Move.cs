@@ -11,7 +11,8 @@ namespace Blitzcrank.Robot
         private bool _isMoveToHand=false;
         
         private bool _isNotMove=false;
-       private GameObject _hand;
+        private GameObject _hand;
+        private CharacterRobot _characterRobot;
         
         [SerializeField] private float _speedMoveToHand;
 
@@ -22,15 +23,22 @@ namespace Blitzcrank.Robot
         
 
 
+        private void Start()
+        {
+            _characterRobot=GetComponent<CharacterRobot>();
+        }
         private void Update()
         {
-            if(_isMoveToHand==true)
+            if(_characterRobot.GetEndGame()==false)
             {
-                moveToHand();
-            }
-            else if(_isMoveToHand==false && _isNotMove==false)
-            {
-                Moved();
+                if(_isMoveToHand==true)
+                {
+                    moveToHand();
+                }
+                else if(_isMoveToHand==false && _isNotMove==false)
+                {
+                    Moved();
+                }
             }
         }
 
