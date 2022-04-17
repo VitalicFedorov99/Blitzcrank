@@ -5,7 +5,10 @@ using  UnityEngine.SceneManagement;
 public class WinOrLose : MonoBehaviour
 {
 
-    public string _nameScene;
+    public string NameScene;
+    public int CountLevel;
+
+    public StaticData Data;
     public GameObject UiWin;
 
     public GameObject UIEndGame;
@@ -26,11 +29,12 @@ public class WinOrLose : MonoBehaviour
         Debug.Log(countStars);
         UIEndGame.SetActive(true);
         UiWin.SetActive(true);
-        //Debug.Log(countStars);
+        Debug.Log(countStars);
         for(int i=0;i<countStars;i++)
         {
             Stars[i].SetActive(true);
         }
+        Data.SetLevelStars(CountLevel,countStars);
         //SceneTransitionManager.SwitchToLevelSync("SampleScene");
         //UILose.SetActive(false);
     }
@@ -38,7 +42,7 @@ public class WinOrLose : MonoBehaviour
 
     public void Restart()
     {
-       SceneManager.LoadScene(_nameScene);
+       SceneManager.LoadScene(NameScene);
     }
     public void Menu()
     {
