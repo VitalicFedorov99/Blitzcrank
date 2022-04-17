@@ -3,15 +3,15 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class SceneTransitionManager : MonoBehaviour
-{
-    private static SceneTransitionManager instance;
-    private AsyncOperation loadingSceneOperation;
-    private Animator loadingScreenAnimator;
-    private bool isAnimEnd = false;
-
+{   
     [SerializeField] private Scrollbar progressBar;
     [SerializeField] private Text loadingText;
     [SerializeField] private GameObject loadingScreen;
+    private static SceneTransitionManager instance;
+    private AsyncOperation loadingSceneOperation;
+    private Animator loadingScreenAnimator;
+    private bool isLoadingOver = false;
+    private string currentSceneName = null;
     
 
     private void Awake(){ 
@@ -21,12 +21,14 @@ public class SceneTransitionManager : MonoBehaviour
     }
     private void Update() {
         if(loadingSceneOperation != null) 
-        {
+        {    
             progressBar.size = loadingSceneOperation.progress;
-            if (isAnimEnd && Input.GetKeyDown(KeyCode.Return)) {
+            if (loadingSceneOperation.progress>=0.9f) LoadingOver();
+
+            if (Input.GetKeyDown(KeyCode.Return)) {
                 instance.loadingSceneOperation.allowSceneActivation = true;
                 HideLoadingScreen();
-                isAnimEnd = false;
+                isLoadingOver = false;
             }
         }
     }
@@ -34,15 +36,20 @@ public class SceneTransitionManager : MonoBehaviour
         instance.loadingScreenAnimator.SetTrigger("Appears");
         instance.loadingSceneOperation = SceneManager.LoadSceneAsync(levelName);
         instance.loadingSceneOperation.allowSceneActivation = false;
-        
-    }
-    public void OnAnimationOver(){
-        progressBar.gameObject.SetActive(false);
-        loadingText.text = "Press ENTER to continue.";
-        isAnimEnd = true;
+        instance.currentSceneName = levelName;
     }
 
-    public void HideLoadingScreen(){
+    public static void RestartLevel(){
+        SceneManager.LoadScene(instance.currentSceneName);
+    }
+
+    private void LoadingOver(){
+        progressBar.gameObject.SetActive(false);
+        loadingText.text = "Press ENTER to continue.";
+        isLoadingOver = true;
+    }
+
+    private void HideLoadingScreen(){
         instance.loadingScreenAnimator.SetTrigger("Hidding");
         instance.loadingSceneOperation.allowSceneActivation = true;
     }
