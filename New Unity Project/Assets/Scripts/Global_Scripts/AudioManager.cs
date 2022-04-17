@@ -6,11 +6,11 @@ public class AudioManager : MonoBehaviour
     private static AudioManager instance;
 
     private void Start() => instance = this;
-    [SerializeField] private Audio[] AudioSoures;
+    [SerializeField] private Audio[] AudioClips;
 
-    public static bool GetAudioSource(string name, out AudioSource value) {
+    public static bool GetAudioSource(string name, out AudioClip value) {
         value = null;
-        foreach (var audio in instance.AudioSoures)
+        foreach (var audio in instance.AudioClips)
         {            
             if(audio.CheckName(name, out var result)){
                 value = result;
