@@ -8,5 +8,7 @@ public enum EnumObservedType
     EnemyStun,
     StarFind,
     TimeIsDone,
-    Finished
+    Finished,
+    RobotDead
+
 }

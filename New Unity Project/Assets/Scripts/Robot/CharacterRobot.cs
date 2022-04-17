@@ -14,11 +14,16 @@ public class CharacterRobot : MonoBehaviour
     {
         _health-=damage;
         Debug.Log("AЙ");
+        if(_health<=0)
+        {
+            Death();
+        }
     }
 
     public void Death()
     {
         Debug.Log("умираю");
+        MissionObserver.GetObservedTypeAction(EnumObservedType.RobotDead);
     }
 
 
