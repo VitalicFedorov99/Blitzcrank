@@ -6,28 +6,40 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "StaticData", menuName = "Data")]
 public class StaticData : ScriptableObject 
 {
-    [SerializeField] private int countlevel=30;
+    [SerializeField] private int _countlevel=30;
 
-   [SerializeField] private int [] StarsOnLevels;
+    [SerializeField] private int [] _starsOnLevels;
 
-    [SerializeField] private bool [] CompletedLevels;
+    [SerializeField] private bool [] _completedLevels;
+
+    
 
     public void SetLevelStars(int numberLevel,int countStars)
     {
-        if(numberLevel<countlevel)
+        if(numberLevel<_countlevel)
         {
-            if(StarsOnLevels[numberLevel]<countStars)
-            StarsOnLevels[numberLevel]=countStars;
-            CompletedLevels[numberLevel]=true;
+            if(_starsOnLevels[numberLevel]<countStars)
+            _starsOnLevels[numberLevel]=countStars;
+            _completedLevels[numberLevel]=true;
         }
     }
 
+
+    public int[] GetStarsOnLevels()
+    {
+            return _starsOnLevels;
+    }
+
+    public bool[] GetCompletedLevels()
+    {
+            return _completedLevels;
+    }
     public void SetupData()
     {
-        for(int i=0;i<countlevel;i++)
+        for(int i=0;i<_countlevel;i++)
         {
-            StarsOnLevels[i]=0;
-            CompletedLevels[i]=false;
+            _starsOnLevels[i]=0;
+            _completedLevels[i]=false;
         }
     }
 }

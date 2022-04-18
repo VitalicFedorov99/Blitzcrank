@@ -18,9 +18,15 @@ public class Hand : MonoBehaviour
     
     [SerializeField]private bool _isHandtoHook=false;
 
+    [SerializeField]private AudioSource _audio; 
+
     private Rope _rope;
     public void SetupHand(Vector3 target,float speed, GameObject robot,Rope rope)
     {
+        AudioClip clip;
+        AudioManager.GetAudioSource("Skill1",out clip);
+        _audio=GetComponent<AudioSource>();
+         _audio.clip=clip;
         _target=target;
         _speed=speed;
         _robot=robot;
@@ -87,6 +93,8 @@ public class Hand : MonoBehaviour
         {
             obj.Grab(gameObject);
             obj.Grab();
+            _audio.Play();
+            //AudioManager.GetAudioSource()
             _isHandBack=true;
         }
         if(other.TryGetComponent(out IEnemy enemy))

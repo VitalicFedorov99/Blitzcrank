@@ -5,8 +5,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] private Transform player;
     [SerializeField] private float XBorderOffset = 10f;
     [SerializeField] private float YBorderOffset = 10f;
-    [SerializeField] private GameObject test;
-    [SerializeField] private Canvas canvas;
+    
 
     private float viewAreaHalfHeight;
     private float halfDistanceBetweenStates;

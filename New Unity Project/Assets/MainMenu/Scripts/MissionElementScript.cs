@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,35 +10,27 @@ public class MissionElementScript : MonoBehaviour
     [Header("UI-Elements")]
     [SerializeField] private Image[] stars;
     [SerializeField] private Text missionNumber;
+    [SerializeField] private string missionTechName;
 
-    [Header("TEST")]
-    [SerializeField] private MissionInfo missionInfo;
-    private string missionTechName;
+    [SerializeField] private bool isMissiaActiv=false;
+    [SerializeField] private int number;
 
-    private void Setup(MissionInfo missionInfo)
+    public void Setup(int starsCount, bool isMissionAvailable)
     {
-        for(int i = 0; i < missionInfo.starCount; i++) stars[i].sprite = obtainedStar;
-        if(missionInfo.isMissionAvailable) {
+        for(int i = 0; i < starsCount; i++) stars[i].sprite = obtainedStar;
+        if(isMissionAvailable) {
             GetComponent<Image>().sprite = availableMissionSprite;
             this.missionNumber.color = Color.white;
-        }
-        this.missionNumber.text = missionInfo.missionNumber.ToString();
-        this.missionTechName = missionInfo.missionTechName;
-    }
+            isMissiaActiv=isMissionAvailable;
 
-    private void Start() {
-        Setup(missionInfo);
+        }
+        this.missionNumber.text = number.ToString();
+       
     }
 
     public void OnClick()
     {
-        SceneTransitionManager.SwitchToLevel(missionTechName);
+        if(isMissiaActiv==true)
+        SceneTransitionManager.SwitchToLevelSync(missionTechName);
     }
-}
-
-[Serializable] public struct MissionInfo{
-    [Range(0, 3)]public int starCount;
-    public bool isMissionAvailable;
-    public int missionNumber;
-    public string missionTechName;
 }

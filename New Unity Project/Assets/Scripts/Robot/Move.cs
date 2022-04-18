@@ -14,18 +14,21 @@ namespace Blitzcrank.Robot
         private GameObject _hand;
         private CharacterRobot _characterRobot;
         
+        private Animator _animator;
         [SerializeField] private float _speedMoveToHand;
 
         [SerializeField] private float _distToHand;
 
         [SerializeField] private float _speed=5f;
 
-        
+         private FlipRobot _flipper;
 
 
         private void Start()
         {
             _characterRobot=GetComponent<CharacterRobot>();
+            _animator=GetComponent<Animator>();
+            _flipper=GetComponent<FlipRobot>();
         }
         private void Update()
         {
@@ -39,12 +42,34 @@ namespace Blitzcrank.Robot
                 {
                     Moved();
                 }
+
+            }
+            else
+            {
+                _animator.SetBool("WalkRobot",false);
             }
         }
 
         private void Moved()
         {
                 float rotation = Input.GetAxis("Horizontal") * _speed;
+                
+                if(rotation==0)
+                {
+                    _animator.SetBool("WalkRobot",false);
+                }
+                else
+                {
+                     _animator.SetBool("WalkRobot",true);
+                }
+                // if(rotation>0)
+                // {
+                //     _flipper.Flip(false);
+                // }
+                // if(rotation<0)
+                // {
+                //     _flipper.Flip(true);
+                // }
                 
                 rotation *= Time.deltaTime;
 

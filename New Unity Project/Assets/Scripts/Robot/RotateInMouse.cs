@@ -63,10 +63,10 @@ public class RotateInMouse : MonoBehaviour
             Vector3 speed = (mouseInWorld-transform.position) * 5;
 
 
-            if(dist<=distanceRay && _isRender==true)
-            {
-                line.ShowTrajectory(obj.transform.position, speed);
-            }
+            // if(dist<=distanceRay && _isRender==true)
+            // {
+                // line.ShowTrajectory(obj.transform.position, speed);
+            // }
 
             if(Input.GetKeyDown(KeyCode.Z)&&_isRender==true && skillZ==true)
             {

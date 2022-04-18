@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 8715903816636510894}
   - component: {fileID: 8715903816636510883}
   - component: {fileID: 8715903816636510880}
-  - component: {fileID: 8715903816636510881}
+  - component: {fileID: 2713149503790931501}
   - component: {fileID: 6176577433206696206}
   m_Layer: 5
   m_Name: MissionPanel
@@ -156,7 +156,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &8715903816636510881
+--- !u!114 &2713149503790931501
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -165,21 +165,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 8715903816636510895}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d24e7f8e854f8e48a9ee7d5b7739705, type: 3}
+  m_Script: {fileID: 11500000, guid: 7c820b6e855a55c4583ad06e0f5d8666, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  availableMissionSprite: {fileID: 21300000, guid: 0b77d9b8048d8e9409c0c0622bf5a38d, type: 3}
-  obtainedStar: {fileID: 21300000, guid: 801cdbdd8d582794dbcae286d236efb6, type: 3}
-  stars:
-  - {fileID: 8715903816888707561}
-  - {fileID: 8715903816625351992}
-  - {fileID: 8715903817437203766}
-  missionNumber: {fileID: 8715903816694346157}
-  missionInfo:
-    starCount: 1
-    isMissionAvailable: 1
-    missionNumber: 1
-    missionTechName: SampleScene
+  availableMissionSprite: {fileID: 0}
+  obtainedStar: {fileID: 0}
+  stars: []
+  missionNumber: {fileID: 0}
+  missionTechName: 
+  number: 0
 --- !u!114 &6176577433206696206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -224,7 +218,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8715903816636510881}
+      - m_Target: {fileID: 2713149503790931501}
         m_TargetAssemblyTypeName: MissionElementScript, Assembly-CSharp
         m_MethodName: OnClick
         m_Mode: 1

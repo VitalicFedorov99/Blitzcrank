@@ -18,9 +18,13 @@ public class Soldier : ObservedObject,IEnemy,IObjectGrab
     [SerializeField] private int idPointWalk=0;
     [SerializeField] private StateSoldier _state;
     [SerializeField] private StateSoldier _lastState;
+
+    [SerializeField] private GameObject _stunObject;
     //[SerializeField] private string _textDialog;
 
     private Transform _pointMove;
+
+    private AudioSource _audio;
     IEnumerator _soldierShoot;
     IEnumerator _soldierMove; 
     IEnumerator _soldierMean; 
@@ -44,6 +48,7 @@ public class Soldier : ObservedObject,IEnemy,IObjectGrab
         if(_lastState==StateSoldier.Shoot) StopCoroutine(_soldierShoot);
         if(_lastState==StateSoldier.Walk) StopCoroutine(_soldierMove);
         //StopCoroutine(_soldierMean);
+        _stunObject.SetActive(true);
         observedEvent?.Invoke(EnumObservedType.EnemyStun);
         StartCoroutine(Stuning());
     }
@@ -53,7 +58,8 @@ public class Soldier : ObservedObject,IEnemy,IObjectGrab
     
     public void Attack()
     {
-      Debug.Log("Shoot");
+      //Debug.Log("Shoot");
+      _audio.Play();
       GameObject bull=Instantiate(_bullet,_aim.position,Quaternion.identity);
       bull.GetComponent<BulletEnemy>().Setup(_vectorDirection);
     }
@@ -98,6 +104,10 @@ public class Soldier : ObservedObject,IEnemy,IObjectGrab
   {
     //   _soldierMean=MakeAdecision();
     //   StartCoroutine(_soldierMean);
+    _audio=GetComponent<AudioSource>();
+     AudioClip clip;
+     AudioManager.GetAudioSource("ShootSound2",out clip);
+     _audio.clip=clip;
       _soldierShoot=Shoot();
       StartCoroutine(_soldierShoot);
       _state=StateSoldier.Shoot;
@@ -128,6 +138,7 @@ public class Soldier : ObservedObject,IEnemy,IObjectGrab
              _soldierShoot=Shoot();
              StartCoroutine(_soldierShoot);
          }
+         _stunObject.SetActive(false);
         //_soldierMean=MakeAdecision();
         //StartCoroutine(_soldierMean);
         Debug.Log("StunEnd");

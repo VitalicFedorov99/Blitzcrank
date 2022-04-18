@@ -39,6 +39,10 @@ public class SceneTransitionManager : MonoBehaviour
         instance.currentSceneName = levelName;
     }
 
+     public static void SwitchToLevelSync(string levelName)
+     {
+       SceneManager.LoadScene(levelName);
+     }
     public static void RestartLevel(){
         SceneManager.LoadScene(instance.currentSceneName);
     }

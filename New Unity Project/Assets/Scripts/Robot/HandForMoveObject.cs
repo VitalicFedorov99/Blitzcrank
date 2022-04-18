@@ -35,8 +35,14 @@ public class HandForMoveObject : MonoBehaviour
      private bool _blockLeft=false;
      private bool _blockDown=false; 
      private bool _blockUp=false;
+
+     private AudioSource _audio;
      public void SetupHand(Vector3 target,float speed, GameObject robot,Rope rope)
      {
+         _audio=GetComponent<AudioSource>();
+         AudioClip clip;
+         AudioManager.GetAudioSource("Skill2",out clip);
+        _audio.clip=clip;
         _target=target;
         _speed=speed;
         _robot=robot;
@@ -191,6 +197,7 @@ public class HandForMoveObject : MonoBehaviour
 
      public void ObjectCaptured(GameObject obj)
      {
+         _audio.Play();
          gameObject.transform.SetParent(obj.transform);
          _robot.GetComponent<Move>().GetIsNotMove(true);
          _grabObject=obj;
@@ -206,6 +213,7 @@ public class HandForMoveObject : MonoBehaviour
 
      public void DestroyGrabObj()
      {
+          _audio.Play();
          Debug.Log("Отпускаю");
          _isUse=true;
          if(_grabObject.TryGetComponent(out BigBox box))

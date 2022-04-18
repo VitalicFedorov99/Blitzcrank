@@ -43,6 +43,19 @@ public class FlipRobot : MonoBehaviour
        } 
    }
 
+   public void Flip(bool flag)
+   {
+       if(flag==true)
+       {
+             _sprite.flipX=true;
+           _robot.obj=_robot.obj2;
+       }
+       else 
+       {
+            _sprite.flipX=false;
+            _robot.obj=_robot.obj1;
+       }
+   }
   
 
 }
