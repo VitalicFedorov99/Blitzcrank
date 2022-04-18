@@ -18,6 +18,8 @@ public class Lava : MonoBehaviour
     [SerializeField] private bool _isStopUpdateLava=false;
 
     
+
+    
     private void Start() 
     {
       //StartCoroutine(MoveLava());

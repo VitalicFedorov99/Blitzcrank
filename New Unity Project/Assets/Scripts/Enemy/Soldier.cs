@@ -24,6 +24,7 @@ public class Soldier : ObservedObject,IEnemy,IObjectGrab
 
     private Transform _pointMove;
 
+    private BoxCollider2D _collider;
     private AudioSource _audio;
     IEnumerator _soldierShoot;
     IEnumerator _soldierMove; 
@@ -49,6 +50,7 @@ public class Soldier : ObservedObject,IEnemy,IObjectGrab
         if(_lastState==StateSoldier.Walk) StopCoroutine(_soldierMove);
         //StopCoroutine(_soldierMean);
         _stunObject.SetActive(true);
+        _collider.enabled=false;
         observedEvent?.Invoke(EnumObservedType.EnemyStun);
         StartCoroutine(Stuning());
     }
@@ -104,6 +106,7 @@ public class Soldier : ObservedObject,IEnemy,IObjectGrab
   {
     //   _soldierMean=MakeAdecision();
     //   StartCoroutine(_soldierMean);
+    _collider=GetComponent<BoxCollider2D>();
     _audio=GetComponent<AudioSource>();
      AudioClip clip;
      AudioManager.GetAudioSource("ShootSound2",out clip);
@@ -141,6 +144,7 @@ public class Soldier : ObservedObject,IEnemy,IObjectGrab
          _stunObject.SetActive(false);
         //_soldierMean=MakeAdecision();
         //StartCoroutine(_soldierMean);
+        _collider.enabled=true;
         Debug.Log("StunEnd");
     }
   /*  IEnumerator MakeAdecision()

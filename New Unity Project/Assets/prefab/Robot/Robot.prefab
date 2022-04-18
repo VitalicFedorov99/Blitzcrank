@@ -231,8 +231,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c904cd0c74177ae4d8a5c693737f1117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 10
+  _health: 3
   _batary: 0
+  _textHP: {fileID: 0}
 --- !u!114 &5904293894137622638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -362,7 +363,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4b1480adad3b55d46a9a1598abb9eafb, type: 2}
+  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -505,7 +506,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4b1480adad3b55d46a9a1598abb9eafb, type: 2}
+  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

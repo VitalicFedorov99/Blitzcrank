@@ -34,12 +34,14 @@ public class StaticData : ScriptableObject
     {
             return _completedLevels;
     }
+    
+
     public void SetupData()
     {
         for(int i=0;i<_countlevel;i++)
         {
             _starsOnLevels[i]=0;
-            _completedLevels[i]=false;
+            //_completedLevels[i]=false;
         }
     }
 }

@@ -6,9 +6,9 @@ public class MissionObserver : MonoBehaviour
     // public static  MissionObserver instance {get; private set;}
     [SerializeField] private WinOrLose winOrLose;
     public static UnityAction<EnumObservedType> GetObservedTypeAction;
-    private int CountEnemyKills=0;
-    private int CountEnemyStuns=0;
-    private int CountStarFind=0;
+    [SerializeField] private int CountEnemyKills=0;
+    [SerializeField]private int CountEnemyStuns=0;
+    [SerializeField] private int CountStarFind=0;
 
 
 
@@ -65,6 +65,7 @@ public class MissionObserver : MonoBehaviour
 
     private void Finished() {
         Debug.Log("Победа");
+        Debug.Log("Stars:" +CountStarFind);
         winOrLose.Win(CountStarFind);
     }
 
